@@ -1,3 +1,4 @@
+'use client';
 import NotificatioBadge from "./notificationBadge";
 
 export default function SingleNotification() {

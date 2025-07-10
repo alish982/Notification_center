@@ -1,6 +1,11 @@
-import NotificationCenter from "./components/notifications/notificationCenter";
+'use client'
+import NotificationCenter from "./components/notificationCenter";
+import usePollingNotifications from "./hooks/simulateNoti";
 
 export default function Home() {
+
+  usePollingNotifications();
+
   return (
     <div>
       <NotificationCenter />
