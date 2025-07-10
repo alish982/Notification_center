@@ -73,16 +73,23 @@
 
 // /src/components/Notification/NotificationCenter.jsx
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { markAllRead } from '../featuers/notificationsSlice';
 
 function NotificationCenter() {
     const notifications = useSelector((state) => state.notifications.items);
     const dispatch = useDispatch();
+    const [filter, setFilter] = useState(null);
+
+    const filteredNotifications = filter
+        ? notifications.filter((n) => n.type === filter)
+        : notifications;
+
+    const types = ['error', 'info', 'success', 'warning'];
 
     return (
-        <div className="max-w-md mx-auto bg-white shadow rounded-lg">
+        <div className="max-w-xl mx-auto bg-white shadow rounded-2xl my-4">
             <div className="flex justify-between items-center px-4 py-2 border-b">
                 <h2 className="text-xl font-bold">Notifications</h2>
                 <button
@@ -92,27 +99,66 @@ function NotificationCenter() {
                     Mark all as read
                 </button>
             </div>
+
+            <div className="px-4 py-2">
+                {notifications.length > 0 && (
+                    <div className="flex gap-3 animate-fade-in-up">
+                        {[...new Set(notifications.map((n) => n.type))].map((type) => (
+                            <button
+                                key={type}
+                                onClick={() => setFilter(type)}
+                                className={`capitalize rounded px-3 py-1 shadow border transition-colors duration-200 
+                        ${filter === type ? 'bg-blue-100 font-semibold' : 'bg-white font-normal'}`}
+                                style={{ minWidth: '70px' }} // ensures consistent button width
+                            >
+                                {type}
+                            </button>
+                        ))}
+                        <button
+                            onClick={() => setFilter(null)}
+                            className={`capitalize rounded px-3 py-1 shadow border transition-colors duration-200 
+                    ${filter === null ? 'bg-blue-100 font-semibold' : 'bg-white font-normal'}`}
+                            style={{ minWidth: '70px' }}
+                        >
+                            All
+                        </button>
+                    </div>
+                )}
+            </div>
+
+
             <div className="space-y-2 p-4">
-                {notifications.length === 0 ? (
-                    <p className="text-gray-500 text-center">No notifications yet.</p>
+                {filteredNotifications.length === 0 ? (
+                    <p className="text-gray-500 text-center">No notifications to show.</p>
                 ) : (
-                    notifications.map((notif) => (
+                    filteredNotifications.map((notif) => (
                         <div
                             key={notif.id}
-                            className={`p-3 rounded border-l-4 ${notif.type === 'error'
-                                    ? 'border-red-500'
-                                    : notif.type === 'warning'
-                                        ? 'border-yellow-500'
-                                        : notif.type === 'success'
-                                            ? 'border-green-500'
-                                            : 'border-blue-500'
+                            className={`p-3 border-l-4 my-3 rounded-2xl ${notif.type === 'error'
+                                ? 'border-red-500'
+                                : notif.type === 'warning'
+                                    ? 'border-yellow-500'
+                                    : notif.type === 'success'
+                                        ? 'border-green-500'
+                                        : 'border-blue-500'
                                 } bg-white shadow`}
                         >
                             <div className="font-semibold">{notif.message}</div>
                             <div className="text-sm text-gray-600">{notif.description}</div>
                             <div className="text-xs text-gray-400 mt-1">
-                                {new Date(notif.timestamp).toLocaleString()}
+                                {(() => {
+                                    const timestamp = new Date(notif.timestamp);
+                                    const now = new Date();
+                                    const diffTime = now.setHours(0, 0, 0, 0) - timestamp.setHours(0, 0, 0, 0);
+                                    const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                                    if (diffDays === 0) return "Today";
+                                    if (diffDays === 1) return "Yesterday";
+                                    return `${Math.floor(diffDays)} days ago`;
+                                })()}{" "}
+                                at {new Date(notif.timestamp).toLocaleTimeString().split(":").slice(0, 2).join(":")}
                             </div>
+
                             {!notif.read && (
                                 <div className="text-xs font-medium text-red-500 mt-1">Unread</div>
                             )}
