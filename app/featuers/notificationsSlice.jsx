@@ -8,7 +8,9 @@ const initialState = {
 
 const notificationSlice = createSlice({
     name: 'notifications',
-    initialState,
+    initialState: {
+        items: [],
+    },
     reducers: {
         addNotification: (state, action) => {
             state.items.unshift(action.payload);
@@ -20,8 +22,17 @@ const notificationSlice = createSlice({
             state.items = state.items.map((n) => ({ ...n, read: true }));
             state.unreadCount = 0;
         },
+        addNotification: (state, action) => {
+            state.items.unshift(action.payload)
+        }, 
+        markAsRead: (state, action) => {
+            const notification = state.items.find(n => n.id === action.payload);
+            if (notification) {
+                notification.read = true;
+            }
+        }
     },
 });
 
-export const { addNotification, markAllRead } = notificationSlice.actions;
+export const { addNotification, markAllRead, markAsRead } = notificationSlice.actions;
 export default notificationSlice.reducer;

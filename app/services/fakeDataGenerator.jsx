@@ -22,7 +22,7 @@ export const sampleNotifications = [
         message: "Your payment was successful.",
         description: "Invoice #9321 has been paid.",
         timestamp: "2025-07-07T10:30:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 4,
@@ -38,7 +38,7 @@ export const sampleNotifications = [
         message: "New feature released: Dark Mode!",
         description: "Go to Settings to switch to the new dark mode.",
         timestamp: "2025-07-06T18:05:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 6,
@@ -46,7 +46,7 @@ export const sampleNotifications = [
         message: "Account linked successfully.",
         description: "Your bank account has been linked to your profile.",
         timestamp: "2025-07-05T09:12:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 7,
@@ -70,7 +70,7 @@ export const sampleNotifications = [
         message: "Weekly digest is ready.",
         description: "Check out your weekly activity summary.",
         timestamp: "2025-07-02T07:25:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 10,
@@ -78,7 +78,7 @@ export const sampleNotifications = [
         message: "You’ve earned a reward!",
         description: "Thanks for being an active user. Claim your badge now.",
         timestamp: "2025-07-01T19:55:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 11,
@@ -94,7 +94,7 @@ export const sampleNotifications = [
         message: "Sync failed.",
         description: "Unable to sync data with the server.",
         timestamp: "2025-06-29T11:10:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 13,
@@ -110,7 +110,7 @@ export const sampleNotifications = [
         message: "Backup completed.",
         description: "Your data was backed up successfully.",
         timestamp: "2025-06-27T02:00:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 15,
@@ -134,7 +134,7 @@ export const sampleNotifications = [
         message: "App crashed unexpectedly.",
         description: "Crash report sent to development team.",
         timestamp: "2025-06-24T16:45:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 18,
@@ -142,7 +142,7 @@ export const sampleNotifications = [
         message: "Settings saved.",
         description: "Your preferences were updated successfully.",
         timestamp: "2025-06-23T13:20:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 19,
@@ -150,7 +150,7 @@ export const sampleNotifications = [
         message: "You have new followers.",
         description: "3 new people followed you this week.",
         timestamp: "2025-06-22T08:50:00Z",
-        read: true,
+        read: false,
     },
     {
         id: 20,
