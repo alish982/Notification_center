@@ -1,7 +1,10 @@
 import React from 'react';
+import { useMemo } from 'react';
 
 function FilterButtons({ notifications, filter, setFilter, setVisibleCount }) {
-    const uniqueTypes = [...new Set(notifications.map((n) => n.type))];
+    const uniqueTypes = useMemo(() => {
+        return [...new Set(notifications.map((n) => n.type))];
+    }, [notifications]);
 
     return (
         <div className="px-4 py-2">

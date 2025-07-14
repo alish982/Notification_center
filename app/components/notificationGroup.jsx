@@ -1,8 +1,11 @@
 import React from 'react';
 import SingleNotification from './notificationItem';
+import { useMemo } from 'react';
 
 function NotificationList({ notifications, visibleCount, onMarkAsRead, onSeeMore, onSeeLess }) {
-    const visibleNotifications = notifications.slice(0, visibleCount);
+    const visibleNotifications = useMemo(() => {
+        return notifications.slice(0, visibleCount);
+    }, [notifications, visibleCount]);
 
     return (
         <div className="space-y-2 p-4 cursor-pointer">
@@ -48,3 +51,4 @@ function NotificationList({ notifications, visibleCount, onMarkAsRead, onSeeMore
 }
 
 export default NotificationList;
+

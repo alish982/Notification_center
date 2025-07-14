@@ -7,6 +7,7 @@ import FilterButtons from '../featuers/filterButtons';
 import AddNotificationForm from '../services/addNotification';
 import { toast } from 'react-toastify';
 import { typeStyles } from '../styles/iconsStyle';
+import { useMemo } from 'react';
 
 
 function NotificationCenter() {
@@ -20,9 +21,9 @@ function NotificationCenter() {
     const [newMessage, setNewMessage] = useState('');
     const [newDescription, setNewDescription] = useState('');
 
-    const filteredNotifications = filter
-        ? notifications.filter((n) => n.type === filter)
-        : notifications;
+    const filteredNotifications = useMemo(() => {
+        return filter ? notifications.filter((n) => n.type === filter) : notifications;
+    }, [filter, notifications]);
 
     const handleAddNotification = () => {
         if (!newMessage.trim()) return;
