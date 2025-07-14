@@ -1,10 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a Next.js project bootstrapped with create-next-app.
 
-## Getting Started
-
+Getting Started
 First, run the development server:
 
-```bash
 npm run dev
 # or
 yarn dev
@@ -12,25 +10,106 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+See a Demo here: https://notification-center-74um.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+1).  Component Structure of Notification Center 
 
-To learn more about Next.js, take a look at the following resources:
+.
+├── components
+│   ├── notificationCenter.jsx
+│   ├── notificationGroup.jsx
+│   └── notificationItem.jsx
+├── featuers
+│   ├── filterButtons.jsx
+│   └── notificationsSlice.jsx
+├── globals.css
+├── hooks
+│   └── simulateNoti.jsx
+├── layout.js
+├── page.js
+├── services
+│   ├── addNotification.jsx
+│   └── fakeDataGenerator.jsx
+├── store
+│   └── index.jsx
+├── styles
+│   └── iconsStyle.jsx
+└── wrapper.jsx
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+components/
+        Contains reusable UI components used to build the notification interface.
+        notificationCenter.jsx: Main panel that includes the entire notification system (list, filters, form).
+        notificationGroup.jsx: Displays a list of notifications with pagination logic (see more/less).
+        notificationItem.jsx: Renders an individual notification item with styling and timestamp.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+featuers/
+        Handles feature-specific logic and UI components.
+        notificationsSlice.jsx: Redux Toolkit slice containing logic for adding, reading, and tracking unread notifications.
+        filterButtons.jsx: UI component for filtering notifications by type.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+hooks/
+        Contains custom React hooks.
+        simulateNoti.jsx: A hook that simulates live notifications by dispatching from a sample list at regular intervals.
+
+
+layout.js
+        Defines the global layout of the app. Typically used in Next.js to wrap all pages with a consistent structure (header, footer, etc.).
+
+
+page.js
+        Main entry point of the application. Renders the NotificationCenter and serves as the root view for the user.
+
+
+services/
+        Holds logic or utilities that support the core functionality.
+        addNotification.jsx: UI component for manually adding a new notification via form.
+        fakeDataGenerator.jsx: Provides a static list of sample notifications used for testing or simulation.
+
+
+store/
+        Sets up and exports the Redux store used across the application.
+        index.jsx: Configures the store and registers reducers.
+
+
+styles/
+        Centralizes UI style definitions and theming for consistency.
+        iconsStyle.jsx: Maps notification types to styled icon components and associated class styles.
+        
+
+wrapper.jsx
+        Likely used to wrap the entire application in providers (e.g., Redux Provider), or to apply global context or layout behavior.
+
+
+
+
+2). How new notifications types can be integrated?
+
+->  Right now, we can just add another notification in fake data generator or add through form.
+
+
+3). State management approach and rationale
+
+->  This project uses Redux Toolkit to manage notification state globally in a single slice.
+    Notifications (list and read status) are stored centrally for easy access and updates across components.
+    The slice handles adding new notifications, marking them read, and tracking unread counts.
+    Components use React Redux hooks (useSelector and useDispatch) to interact cleanly with the store.
+
+
+4). How you handle real-time updates? 
+
+-> The project simulates real-time updates using a React hook that dispatches sample notifications to Redux every few seconds. This updates the UI instantly with     new notifications. It allows testing without a backend.
+
+
+5). Edge Cases and Performance Considerations
+      Limit visible notifications to avoid UI slowdown also pagination helps for this.
+      Prevent duplicate IDs to maintain state integrity.
+      Batch rapid updates to reduce re-renders.
+      Immutable state updates prevent bugs.
+      Batch rapid updates to reduce frequent UI re-renders and improve performance.
+      Use immutable state updates to avoid bugs and ensure reliable change detection.
