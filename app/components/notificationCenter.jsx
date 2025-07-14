@@ -59,7 +59,7 @@ function NotificationCenter() {
     };
 
     return (
-        <div className="max-w-xl mx-auto bg-white shadow rounded-2xl my-4">
+        <div className="max-w-xl mx-auto fixed top-0 h-screen left-0 right-0 bg-white shadow rounded-3xl flex flex-col">
             <div className="flex justify-between items-center px-4 py-2 border-b">
                 <h2 className="text-xl font-bold">Notifications</h2>
                 <button
@@ -70,31 +70,38 @@ function NotificationCenter() {
                 </button>
             </div>
 
-            <FilterButtons
-                notifications={notifications}
-                filter={filter}
-                setFilter={setFilter}
-                setVisibleCount={setVisibleCount}
-            />
+            <div className="overflow-y-auto flex-1">
+                <div className="sticky top-0 z-10 bg-white">
+                    <FilterButtons
+                        notifications={notifications}
+                        filter={filter}
+                        setFilter={setFilter}
+                        setVisibleCount={setVisibleCount}
+                    />
+                </div>
 
-            <NotificationList
-                notifications={filteredNotifications}
-                visibleCount={visibleCount}
-                onMarkAsRead={(id) => dispatch(markAsRead(id))}
-                onSeeMore={() => setVisibleCount((prev) => prev + 5)}
-                onSeeLess={() => setVisibleCount(5)}
-            />
+                <NotificationList
+                    notifications={filteredNotifications}
+                    visibleCount={visibleCount}
+                    onMarkAsRead={(id) => dispatch(markAsRead(id))}
+                    onSeeMore={() => setVisibleCount((prev) => prev + 5)}
+                    onSeeLess={() => setVisibleCount(5)}
+                />
+            </div>
 
-            <AddNotificationForm
-                newType={newType}
-                newMessage={newMessage}
-                newDescription={newDescription}
-                setNewType={setNewType}
-                setNewMessage={setNewMessage}
-                setNewDescription={setNewDescription}
-                handleAddNotification={handleAddNotification}
-            />
+            <div className="my-5">
+                <AddNotificationForm
+                    newType={newType}
+                    newMessage={newMessage}
+                    newDescription={newDescription}
+                    setNewType={setNewType}
+                    setNewMessage={setNewMessage}
+                    setNewDescription={setNewDescription}
+                    handleAddNotification={handleAddNotification}
+                />
+            </div>
         </div>
+
     );
 }
 

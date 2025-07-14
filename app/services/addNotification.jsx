@@ -10,7 +10,7 @@ function AddNotificationForm({
     handleAddNotification,
 }) {
     return (
-        <div className="border-t p-4 mt-6">
+        <div className="border-t p-4">
             <h3 className="text-lg font-semibold mb-2">Add New Notifications</h3>
 
             <div className="flex gap-6 flex-wrap mb-4">
