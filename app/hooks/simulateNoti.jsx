@@ -15,7 +15,7 @@ export default function usePollingNotifications() {
             const next = sampleNotifications[indexRef.current];
             dispatch(addNotification(next));
             indexRef.current += 1;
-        }, 3000); // every 3 seconds
+        }, 3000); 
 
         return () => clearInterval(interval);
     }, [dispatch]);

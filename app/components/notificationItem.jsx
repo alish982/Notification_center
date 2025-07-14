@@ -25,17 +25,8 @@ export default function SingleNotification({ notif, onClick }) {
         if (diffDays === 1) return 'Yesterday';
         return `${Math.floor(diffDays)} days ago`;
     };
+    
     return (
-        // <div className="flex gap-3 relative w-full">
-        //     <NotificatioBadge />
-        //     <div className="flex-1 text-sm text-gray-700">
-        //         <span className="font-semibold">Username</span> did something
-        //         <div className="text-gray-500 italic text-xs mt-1">
-        //             “Optional extra message here…”
-        //         </div>
-        //         <div className="text-xs text-gray-400 mt-1">1d</div>
-        //     </div>
-        // </div>
         <div
             onClick={onClick}
             className={`p-3 border-l-4 my-3 rounded-2xl cursor-pointer transition hover:bg-gray-50

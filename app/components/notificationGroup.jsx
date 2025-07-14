@@ -1,5 +1,5 @@
 import React from 'react';
-import NotificationItem from './NotificationItem';
+import SingleNotification from './NotificationItem';
 
 function NotificationList({ notifications, visibleCount, onMarkAsRead, onSeeMore, onSeeLess }) {
     const visibleNotifications = notifications.slice(0, visibleCount);
@@ -11,7 +11,7 @@ function NotificationList({ notifications, visibleCount, onMarkAsRead, onSeeMore
             ) : (
                 <>
                     {visibleNotifications.map((notif) => (
-                        <NotificationItem
+                        <SingleNotification
                             key={notif.id}
                             notif={notif}
                             onClick={() => {
