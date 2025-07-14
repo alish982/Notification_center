@@ -1,5 +1,5 @@
 import React from 'react';
-import SingleNotification from './NotificationItem';
+import SingleNotification from './notificationItem';
 
 function NotificationList({ notifications, visibleCount, onMarkAsRead, onSeeMore, onSeeLess }) {
     const visibleNotifications = notifications.slice(0, visibleCount);
